@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname,"public")))
 
 // Cors Configuation
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://luv-to-meet.vercel.app",
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
@@ -50,7 +50,7 @@ app.post("/signin",async(req,res)=>{
     let {name,email} = req.body
     if (!supabase) {
         console.warn('Supabase client not configured — bypassing DB and returning redirect for dev.')
-        return res.json({ success: true, redirect: "http://localhost:5173/room" })
+        return res.json({ success: true, redirect: "https://luv-to-meet.vercel.app/room" })
     }
 
     const { data: user, error: selectError } = await supabase
@@ -80,10 +80,10 @@ app.post("/signin",async(req,res)=>{
             return res.status(500).json({ success: false, error: insertError.message })
         }
         console.log('Inserted user:', updateuser)
-        return res.json({ success: true, redirect: "http://localhost:5173/room" })
+        return res.json({ success: true, redirect: "https://luv-to-meet.vercel.app/room" })
     }
     else{
-        return res.json({ success: true, redirect: "http://localhost:5173/room" })
+        return res.json({ success: true, redirect: "https://luv-to-meet.vercel.app/room" })
     }
 })
 
